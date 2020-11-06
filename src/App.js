@@ -34,6 +34,11 @@ function App() {
     }
   }
 
+  const handleClearExpenses = () => {
+    setExpenses([]);
+    localStorage.removeItem('expenses');
+  }
+
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses));
   }, [expenses]);
@@ -63,6 +68,7 @@ function App() {
           handleName={handleName}
           handleAmount={handleAmount}
           handleSubmitForm={handleSubmitForm}
+          handleClearExpenses={handleClearExpenses}
         />
         <List expenses={expenses} />
       </Jumbotron>
