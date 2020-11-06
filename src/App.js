@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container } from 'reactstrap';
 import Form from './components/Form';
 import List from './components/List';
 
-const ALL_EXPENSES = [
-  { id: 1, name: 'Buy a book', amount: 20 },
-  { id: 1, name: 'Buy a milk', amount: 5 },
-  { id: 1, name: 'Book a flight ticket', amount: 225 }
-]
+const ALL_EXPENSES = localStorage.getItem('expenses')
+  ? JSON.parse(localStorage.getItem('expenses'))
+  : [];
 
 function App() {
   const [expenses, setExpenses] = useState(ALL_EXPENSES);  
@@ -35,6 +33,10 @@ function App() {
       window.alert('Invalid expense name or amount');
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+  }, [expenses]);
 
   return (
     <Container className='text-center'>
